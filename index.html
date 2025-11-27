@@ -4,994 +4,266 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Solve AI – Smart Math Solver & Scientific Calculator</title>
-
-  <meta name="description"
-        content="Solve AI is an all-in-one smart calculator app with scientific calculator, AI math solver, GST & EMI tools, currency and unit converter, age calculator, and calculation history." />
-
-  <style>
-    /* -------- Base -------- */
-    :root {
-      --bg-main: #020617;
-      --bg-elevated: rgba(15, 23, 42, 0.9);
-      --bg-card: rgba(15, 23, 42, 0.95);
-      --accent: #4f46e5;
-      --accent-soft: #6366f1;
-      --accent-green: #22c55e;
-      --accent-cyan: #22d3ee;
-      --accent-orange: #f97316;
-      --text-main: #e5e7eb;
-      --text-muted: #9ca3af;
-      --border-subtle: rgba(148, 163, 184, 0.15);
-      --radius-lg: 18px;
-      --radius-md: 12px;
-      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.8);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top left, #1e293b 0, transparent 55%),
-        radial-gradient(circle at bottom right, #0f172a 0, transparent 60%),
-        var(--bg-main);
-      color: var(--text-main);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    .page {
-      min-height: 100vh;
-      padding: 18px 16px 60px;
-    }
-
-    .shell {
-      max-width: 1120px;
-      margin: 0 auto;
-    }
-
-    /* -------- Top Bar -------- */
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 18px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(17, 24, 39, 0.96));
-      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(148, 163, 184, 0.3);
-      backdrop-filter: blur(20px);
-      position: sticky;
-      top: 6px;
-      z-index: 50;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-    }
-
-    .brand-logo-wrap {
-      width: 40px;
-      height: 40px;
-      border-radius: 14px;
-      background: radial-gradient(circle at 30% 0, #a855f7, #6366f1 45%, #0ea5e9 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.3), 0 12px 30px rgba(79, 70, 229, 0.7);
-      overflow: hidden;
-    }
-
-    .brand-logo {
-      width: 26px;
-      height: 26px;
-      border-radius: 10px;
-      object-fit: cover;
-    }
-
-    .brand-text-main {
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      font-size: 1.02rem;
-    }
-
-    .brand-text-sub {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    .pill-row {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      max-width: 360px;
-    }
-
-    .pill {
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.24);
-      font-size: 0.78rem;
-      color: #e5e7eb;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-      background: radial-gradient(circle at top, rgba(249, 250, 251, 0.08), transparent 70%);
-    }
-
-    .pill-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 10px #22c55e;
-    }
-
-    .btn-primary {
-      padding: 9px 18px;
-      border-radius: 999px;
-      border: none;
-      outline: none;
-      font-size: 0.86rem;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      background: linear-gradient(135deg, #f97316, #facc15);
-      color: #111827;
-      box-shadow: 0 12px 30px rgba(248, 181, 46, 0.7);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
-      white-space: nowrap;
-    }
-
-    .btn-primary span.icon {
-      font-size: 1.05rem;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.03);
-      box-shadow: 0 16px 40px rgba(248, 181, 46, 0.8);
-    }
-
-    .btn-primary:active {
-      transform: translateY(0);
-      box-shadow: 0 8px 18px rgba(248, 181, 46, 0.6);
-    }
-
-    /* -------- Layout -------- */
-    .hero-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-      gap: 32px;
-      margin-top: 34px;
-      align-items: stretch;
-    }
-
-    @media (max-width: 840px) {
-      .topbar {
-        flex-wrap: wrap;
-        border-radius: 18px;
-        align-items: flex-start;
-      }
-      .pill-row {
-        justify-content: flex-start;
-      }
-      .hero-layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    /* -------- Hero -------- */
-    .hero-card {
-      background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.95));
-      border-radius: 24px;
-      padding: 26px 22px 26px;
-      border: 1px solid rgba(148, 163, 184, 0.3);
-      box-shadow: var(--shadow-soft);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: -120px;
-      background:
-        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 55%),
-        radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.18), transparent 55%);
-      opacity: 0.9;
-      pointer-events: none;
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.78rem;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(129, 140, 248, 0.6);
-      background: radial-gradient(circle at top, rgba(129, 140, 248, 0.18), transparent 70%);
-      color: #c7d2fe;
-      margin-bottom: 12px;
-    }
-
-    .eyebrow-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #22c55e, #a3e635);
-      box-shadow: 0 0 12px #22c55e;
-    }
-
-    h1.hero-title {
-      font-size: clamp(2.1rem, 2.9vw, 2.6rem);
-      line-height: 1.1;
-      margin: 0 0 12px;
-      letter-spacing: -0.03em;
-    }
-
-    .hero-title span.highlight {
-      background: linear-gradient(135deg, #38bdf8, #a855f7);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero-subtitle {
-      color: var(--text-muted);
-      font-size: 0.96rem;
-      max-width: 36rem;
-    }
-
-    .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 18px 0 20px;
-    }
-
-    .chip {
-      font-size: 0.78rem;
-      padding: 5px 11px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      background: rgba(15, 23, 42, 0.8);
-      color: #e5e7eb;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .chip-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #38bdf8;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .btn-secondary {
-      padding: 9px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      background: rgba(15, 23, 42, 0.9);
-      color: #e5e7eb;
-      font-size: 0.85rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
-    }
-
-    .btn-secondary span.icon {
-      font-size: 1rem;
-    }
-
-    .btn-secondary:hover {
-      background: rgba(30, 64, 175, 0.9);
-      border-color: rgba(129, 140, 248, 0.8);
-      transform: translateY(-1px);
-    }
-
-    .hero-note {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .hero-note strong {
-      color: #e5e7eb;
-      font-weight: 500;
-    }
-
-    .hero-note-pill {
-      padding: 3px 9px;
-      border-radius: 999px;
-      border: 1px dashed rgba(148, 163, 184, 0.4);
-      font-size: 0.72rem;
-    }
-
-    .hero-mini-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .mini-stat {
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.15), transparent 70%);
-      font-size: 0.78rem;
-      color: #cbd5f5;
-    }
-
-    .mini-stat-title {
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      font-size: 0.7rem;
-      color: #9ca3af;
-    }
-
-    .mini-stat-value {
-      font-weight: 600;
-      margin-top: 3px;
-    }
-
-    /* -------- Preview Card -------- */
-    .preview-card {
-      background: radial-gradient(circle at top, #0f172a, #020617 70%);
-      border-radius: 24px;
-      border: 1px solid rgba(148, 163, 184, 0.3);
-      box-shadow: var(--shadow-soft);
-      padding: 20px 20px 22px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .preview-tag {
-      font-size: 0.74rem;
-      color: #9ca3af;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 10px;
-    }
-
-    .preview-tag span.dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #22c55e;
-      box-shadow: 0 0 12px #22c55e;
-    }
-
-    .phone-frame {
-      border-radius: 26px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      background: radial-gradient(circle at top left, rgba(129, 140, 248, 0.18), transparent 70%);
-      padding: 10px;
-      position: relative;
-      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
-      overflow: hidden;
-    }
-
-    .phone-screen {
-      background: #020617;
-      border-radius: 20px;
-      padding: 18px 14px 18px;
-      border: 1px solid rgba(15, 23, 42, 0.9);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .phone-nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-      font-size: 0.78rem;
-      color: #e5e7eb;
-    }
-
-    .phone-badge {
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      font-size: 0.7rem;
-      color: #9ca3af;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .phone-main {
-      border-radius: 16px;
-      padding: 12px 12px 14px;
-      background: radial-gradient(circle at top left, rgba(79, 70, 229, 0.28), rgba(15, 23, 42, 0.95));
-      border: 1px solid rgba(129, 140, 248, 0.7);
-      box-shadow: 0 16px 40px rgba(79, 70, 229, 0.9);
-      color: #e5e7eb;
-      font-size: 0.8rem;
-    }
-
-    .phone-title {
-      font-size: 0.84rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .phone-row {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin: 6px 0;
-      font-size: 0.75rem;
-    }
-
-    .phone-pill {
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-    }
-
-    .phone-math {
-      margin-top: 6px;
-      padding: 8px;
-      border-radius: 12px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      font-family: SF Mono, ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 0.78rem;
-      color: #e5e7eb;
-    }
-
-    .phone-math .lhs {
-      color: #a5b4fc;
-    }
-
-    .phone-math .rhs {
-      color: #22c55e;
-    }
-
-    .preview-footer {
-      margin-top: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.74rem;
-      color: var(--text-muted);
-    }
-
-    .preview-footer strong {
-      color: #e5e7eb;
-    }
-
-    /* -------- Sections -------- */
-    section {
-      margin-top: 40px;
-    }
-
-    section h2.section-title {
-      font-size: 1.4rem;
-      margin: 0 0 8px;
-      letter-spacing: -0.02em;
-    }
-
-    .section-sub {
-      font-size: 0.94rem;
-      color: var(--text-muted);
-      max-width: 40rem;
-    }
-
-    /* -------- Feature grid -------- */
-    .feature-grid {
-      margin-top: 22px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-    }
-
-    .feature-card {
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-subtle);
-      background: var(--bg-card);
-      padding: 16px 16px 16px;
-      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.8);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .feature-card::before {
-      content: "";
-      position: absolute;
-      inset: -60px;
-      opacity: 0.04;
-      background:
-        radial-gradient(circle at top left, #38bdf8, transparent 60%),
-        radial-gradient(circle at bottom right, #a855f7, transparent 60%);
-    }
-
-    .feature-icon {
-      width: 26px;
-      height: 26px;
-      border-radius: 10px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 8px;
-      font-size: 0.9rem;
-      background: radial-gradient(circle at top, #4f46e5, #0ea5e9);
-      box-shadow: 0 0 16px rgba(56, 189, 248, 0.65);
-    }
-
-    .feature-title {
-      font-size: 0.98rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .feature-body {
-      font-size: 0.86rem;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .feature-list {
-      margin: 0;
-      padding-left: 16px;
-      font-size: 0.82rem;
-      color: #9ca3af;
-    }
-
-    .feature-list li {
-      margin: 2px 0;
-    }
-
-    /* -------- Tools strip -------- */
-    .tools-strip {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 16px;
-      font-size: 0.78rem;
-    }
-
-    .tools-chip {
-      padding: 5px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      background: rgba(15, 23, 42, 0.88);
-      color: #e5e7eb;
-    }
-
-    /* -------- Download Section -------- */
-    .download-card {
-      margin-top: 22px;
-      border-radius: 20px;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
-      padding: 18px 16px 18px;
-      box-shadow: var(--shadow-soft);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .download-text {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      max-width: 34rem;
-    }
-
-    .download-text strong {
-      color: #e5e7eb;
-    }
-
-    .download-cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .apk-note {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    /* -------- Footer -------- */
-    footer {
-      margin-top: 40px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(31, 41, 55, 0.9);
-      font-size: 0.78rem;
-      color: #6b7280;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    footer a {
-      color: #9ca3af;
-      text-decoration: underline;
-      text-decoration-color: rgba(148, 163, 184, 0.5);
-    }
-
-    /* Small screens tweaks */
-    @media (max-width: 640px) {
-      .page {
-        padding: 14px 12px 40px;
-      }
-      .topbar {
-        padding: 10px 12px;
-      }
-      .hero-card,
-      .preview-card {
-        padding: 20px 16px 20px;
-      }
-      .download-card {
-        padding: 14px 14px 16px;
-      }
-    }
-  </style>
+  <meta
+    name="description"
+    content="Solve AI is an all-in-one smart calculator app with scientific calculator, AI math solver, GST & EMI tools, currency & unit converter, age calculator and history export."
+  />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div class="page">
-  <div class="shell">
-
-    <!-- Top bar -->
-    <header class="topbar">
-      <div class="brand">
-        <div class="brand-logo-wrap">
-          <!-- Put logo.png in the same folder as this index.html -->
-          <img src="logo.png" alt="Solve AI logo" class="brand-logo" />
-        </div>
-        <div>
-          <div class="brand-text-main">Solve AI</div>
-          <div class="brand-text-sub">Smart Math Solver &amp; Utilities</div>
-        </div>
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="header-left">
+      <div class="brand-logo-wrap">
+        <!-- Make sure logo.png exists in the repo root -->
+        <img src="logo.png" alt="Solve AI logo" class="brand-logo" />
       </div>
+      <div class="brand-text">
+        <div class="brand-name">Solve AI</div>
+        <div class="brand-tagline">Smart Math Solver &amp; Utilities</div>
+      </div>
+    </div>
 
-      <div class="pill-row">
-        <div class="pill">
-          <span class="pill-dot"></span>
-          No sign-up • No ads
-        </div>
-        <div class="pill">
+    <div class="header-right">
+      <div class="header-badges">
+        <span class="pill pill--status">● No sign-up • No ads</span>
+        <a href="privacy.html" class="pill pill--privacy">
           🔒 Privacy-first • Offline friendly
+        </a>
+      </div>
+      <a href="solve-ai-v1.0.0.apk" class="btn btn-primary">
+        ⬇️ Get APK
+      </a>
+    </div>
+  </header>
+
+  <main class="page-content">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-text">
+        <span class="hero-badge">All-in-One Smart Calculator</span>
+        <h1>
+          Powerful <span class="text-gradient">Scientific Calculator</span><br />
+          with AI help.
+        </h1>
+        <p class="hero-subtitle">
+          Solve AI combines a full scientific calculator, AI math solver, GST &amp; EMI tools,
+          currency &amp; unit converter, age calculator and history in a single clean, modern app.
+          Designed for students, shopkeepers, professionals and everyday users.
+        </p>
+
+        <div class="hero-tags">
+          <span class="tag">Scientific Calculator</span>
+          <span class="tag">AI Step-by-Step Solver</span>
+          <span class="tag">GST &amp; EMI Calculators</span>
+          <span class="tag">Currency &amp; Unit Converter</span>
         </div>
+
+        <div class="hero-actions">
+          <a href="solve-ai-v1.0.0.apk" class="btn btn-primary btn-lg">
+            ⬇️ Download Solve AI APK
+          </a>
+          <a href="privacy.html" class="btn btn-ghost">
+            View Privacy Policy
+          </a>
+        </div>
+
+        <p className="hero-note">
+          <strong>Works great for:</strong> students • shopkeepers • freelancers • office users.
+        </p>
       </div>
 
-      <a href="solve-ai-v1.0.0.apk" class="btn-primary">
-        <span class="icon">⬇️</span>
-        <span>Get APK</span>
-      </a>
-    </header>
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <span class="hero-chip">Live Preview • Solve AI</span>
+          <span class="hero-chip hero-chip--green">AI powered</span>
+        </div>
 
-    <!-- Main hero + preview -->
-    <main class="hero-layout">
-      <!-- Left: hero content -->
-      <section class="hero-card">
-        <div class="hero-inner">
-          <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            All-in-One Smart Calculator
-          </div>
-
-          <h1 class="hero-title">
-            Powerful <span class="highlight">Scientific Calculator</span> with AI help.
-          </h1>
-
-          <p class="hero-subtitle">
-            Solve AI combines a full scientific calculator, AI math solver, GST &amp; EMI tools,
-            currency &amp; unit converter, age calculator and history in a single clean, modern app.
-            Designed for students, shopkeepers, professionals and everyday users.
-          </p>
-
-          <div class="chip-row">
-            <span class="chip"><span class="chip-dot"></span> Scientific Calculator</span>
-            <span class="chip">AI Step-by-Step Solver</span>
-            <span class="chip">GST &amp; EMI Calculators</span>
-            <span class="chip">Currency &amp; Unit Converter</span>
-          </div>
-
-          <div class="hero-actions">
-            <a href="solve-ai-v1.0.0.apk" class="btn-primary">
-              <span class="icon">📥</span>
-              <span>Download Solve AI APK</span>
-            </a>
-
-            <a href="privacy-policy.html" class="btn-secondary">
-              <span class="icon">🔒</span>
-              <span>View Privacy Policy</span>
-            </a>
-          </div>
-
-          <div class="hero-note">
-            <span><strong>Works great for:</strong> students • shopkeepers • freelancers • office users</span>
-            <span class="hero-note-pill">No login • No ads • Lightweight</span>
-          </div>
-
-          <div class="hero-mini-grid">
-            <div class="mini-stat">
-              <div class="mini-stat-title">Smart Tools</div>
-              <div class="mini-stat-value">Scientific, GST, EMI, Age &amp; more</div>
+        <div class="preview-panel">
+          <div class="preview-section">
+            <h2 class="preview-title">Scientific Calculator</h2>
+            <p class="preview-sub">
+              DEG • SCI • sin(θ) • log • x² • √x • Ans
+            </p>
+            <div class="preview-equation">
+              <span class="preview-label">Example problem</span>
+              <code>∫ 2x · eˣ dx from 0 to 1</code>
+              <div class="preview-result">= 2e − 2 ≈ 3.4366</div>
             </div>
-            <div class="mini-stat">
-              <div class="mini-stat-title">AI Assistance</div>
-              <div class="mini-stat-value">Explain steps like a tutor</div>
+          </div>
+
+          <div class="preview-columns">
+            <div class="preview-col">
+              <h3>AI Math Solver</h3>
+              <p>
+                Type, draw or speak any math problem and get a clear, step-by-step explanation
+                that’s easy to understand.
+              </p>
             </div>
-            <div class="mini-stat">
-              <div class="mini-stat-title">History &amp; Export</div>
-              <div class="mini-stat-value">Review &amp; reuse past work</div>
+            <div class="preview-col">
+              <h3>Smart Tools</h3>
+              <p>
+                GST, EMI, currency, unit converter, age calculator and more – all in one smooth,
+                distraction-free app.
+              </p>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Right: preview card -->
-      <aside class="preview-card">
-        <div class="preview-tag">
-          <span class="dot"></span>
-          Live preview • Inside Solve AI
-        </div>
-
-        <div class="phone-frame">
-          <div class="phone-screen">
-            <div class="phone-nav">
-              <span>Scientific Calculator</span>
-              <span class="phone-badge">AI powered</span>
-            </div>
-
-            <div class="phone-main">
-              <div class="phone-title">Example problem</div>
-              <div class="phone-math">
-                <span class="lhs">∫ 2x · eˣ dx from 0 → 1</span><br />
-                <span class="rhs">= 2e − 2 ≈ 3.4366</span>
-              </div>
-
-              <div class="phone-row" style="margin-top: 10px;">
-                <span class="phone-pill">DEG • SCI</span>
-                <span class="phone-pill">sin(θ)</span>
-                <span class="phone-pill">log</span>
-                <span class="phone-pill">x²</span>
-                <span class="phone-pill">√x</span>
-                <span class="phone-pill">Ans</span>
-              </div>
-
-              <div class="phone-row">
-                <span class="phone-pill">AI Math Solver</span>
-                <span class="phone-pill">GST &amp; EMI</span>
-                <span class="phone-pill">Currency</span>
-                <span class="phone-pill">Unit Converter</span>
-              </div>
-            </div>
-
-            <div class="preview-footer">
-              <span>Clean, distraction-free design.</span>
-              <span><strong>Version 1.0.0</strong></span>
-            </div>
-          </div>
-        </div>
-      </aside>
-    </main>
-
-    <!-- Features section -->
-    <section id="features">
-      <h2 class="section-title">What you can do with Solve AI</h2>
-      <p class="section-sub">
-        Every tool is designed to reduce steps and avoid confusion. No cluttered menus, no ads,
-        no extra distractions – just fast, accurate calculations.
+    <!-- FEATURE GRID -->
+    <section class="section">
+      <h2 class="section-title">Everything you need in one app</h2>
+      <p class="section-subtitle">
+        Solve AI replaces multiple separate apps with one powerful, privacy-friendly toolbox.
       </p>
 
       <div class="feature-grid">
         <article class="feature-card">
-          <div class="feature-icon">📐</div>
-          <div class="feature-title">Scientific Calculator</div>
-          <div class="feature-body">
-            A full power scientific calculator for school, college and professional work.
-          </div>
-          <ul class="feature-list">
-            <li>Basic + scientific operations (sin, cos, tan, log, ln, π, e, x², xʸ, √, etc.).</li>
-            <li>Degree / Radian mode with quick toggle.</li>
-            <li>Supports long expressions with brackets.</li>
-            <li>Instant results with clear display and calculation history.</li>
+          <h3>Full Scientific Calculator</h3>
+          <p>
+            Perform scientific, engineering and everyday calculations with support for
+            trigonometry, powers, roots, percentages, memory keys and more.
+          </p>
+          <ul>
+            <li>Trigonometric &amp; inverse functions</li>
+            <li>Log, exponent, powers &amp; roots</li>
+            <li>Memory, history &amp; repeat calculations</li>
           </ul>
         </article>
 
         <article class="feature-card">
-          <div class="feature-icon">🤖</div>
-          <div class="feature-title">AI Math Solver</div>
-          <div class="feature-body">
-            Get help like a private tutor for tough problems.
-          </div>
-          <ul class="feature-list">
-            <li>Type, draw or speak your math question.</li>
-            <li>AI explains step-by-step, not just the final answer.</li>
-            <li>Perfect for algebra, calculus basics and word problems.</li>
+          <h3>AI Step-by-Step Solver</h3>
+          <p>
+            Stuck on a problem? Ask AI. Get clean, step-by-step solutions for equations,
+            percentages, interest, and many more math problems.
+          </p>
+          <ul>
+            <li>Type, draw or speak your question</li>
+            <li>Step-by-step explanations</li>
+            <li>Great for learning &amp; revision</li>
           </ul>
         </article>
 
         <article class="feature-card">
-          <div class="feature-icon">💸</div>
-          <div class="feature-title">GST Calculator</div>
-          <div class="feature-body">
-            Quickly add or remove GST for Indian bills.
-          </div>
-          <ul class="feature-list">
-            <li>Supports 3%, 5%, 12%, 18% and 28% slabs.</li>
-            <li>Shows net amount, GST amount and total amount clearly.</li>
-            <li>Useful for shopkeepers, wholesalers and freelancers.</li>
+          <h3>GST &amp; EMI Calculators</h3>
+          <p>
+            Quickly calculate Indian GST and loan EMIs without spreadsheets or extra apps.
+          </p>
+          <ul>
+            <li>Add / remove GST (3%, 5%, 12%, 18%, 28%)</li>
+            <li>EMI with adjustable rate &amp; tenure</li>
+            <li>Breakdown of net, tax and total amount</li>
           </ul>
         </article>
 
         <article class="feature-card">
-          <div class="feature-icon">🏦</div>
-          <div class="feature-title">EMI &amp; Loan Calculator</div>
-          <div class="feature-body">
-            Understand your loans clearly before you commit.
-          </div>
-          <ul class="feature-list">
-            <li>Enter loan amount, interest rate and tenure.</li>
-            <li>See monthly EMI, total interest and total payable.</li>
-            <li>Great for personal loans, car loans and home loans.</li>
+          <h3>Currency &amp; Unit Converter</h3>
+          <p>
+            Convert values in seconds with accurate rates and units, right inside Solve AI.
+          </p>
+          <ul>
+            <li>Live currency conversion (e.g. USD ↔ INR)</li>
+            <li>20+ unit types – length, area, volume, speed, temperature &amp; more</li>
+            <li>Clean layout for quick daily use</li>
           </ul>
         </article>
 
         <article class="feature-card">
-          <div class="feature-icon">🌍</div>
-          <div class="feature-title">Currency Converter</div>
-          <div class="feature-body">
-            Convert money between currencies with live exchange rates.
-          </div>
-          <ul class="feature-list">
-            <li>Supports major global currencies (USD, INR, EUR, GBP, etc.).</li>
-            <li>Rates fetched from trusted third-party APIs.</li>
-            <li>Clear display of “1 USD = X INR” style conversion.</li>
+          <h3>Age Calculator</h3>
+          <p>
+            Find exact age in years, months and days – ideal for forms, records and planning.
+          </p>
+          <ul>
+            <li>Precise difference between two dates</li>
+            <li>Simple, easy-to-read layout</li>
+            <li>No personal data stored on our servers</li>
           </ul>
         </article>
 
         <article class="feature-card">
-          <div class="feature-icon">📏</div>
-          <div class="feature-title">Unit Converter</div>
-          <div class="feature-body">
-            Convert measurements without searching the internet.
-          </div>
-          <ul class="feature-list">
-            <li>Length, area, volume, weight, temperature, speed &amp; more.</li>
-            <li>Instant result as you type, with commonly used presets.</li>
+          <h3>History &amp; Export</h3>
+          <p>
+            Keep track of your important work. Review previous calculations whenever you need.
+          </p>
+          <ul>
+            <li>Local history stored on your device</li>
+            <li>Clear or export when you want</li>
+            <li>No account, no cloud, no tracking</li>
+          </ul>
+        </article>
+
+        <article class="feature-card feature-card--highlight">
+          <h3>Privacy-first design</h3>
+          <p>
+            Solve AI is built to respect your data. No sign-up, no ads, and no selling of your
+            information.
+          </p>
+          <ul>
+            <li>AI requests are sent securely</li>
+            <li>No personal identity data required</li>
+            <li>Read our full policy:
+              <a href="privacy.html">Privacy Policy</a>
+            </li>
           </ul>
         </article>
 
         <article class="feature-card">
-          <div class="feature-icon">🎂</div>
-          <div class="feature-title">Age Calculator</div>
-          <div class="feature-body">
-            Find exact age from date of birth in years, months and days.
-          </div>
-          <ul class="feature-list">
-            <li>Helpful for forms, official documents and planning.</li>
+          <h3>Fast, lightweight &amp; offline friendly</h3>
+          <p>
+            The core calculator and tools work even when you’re offline, so you can rely on Solve
+            AI anytime.
+          </p>
+          <ul>
+            <li>Optimized for low-end devices</li>
+            <li>Minimum permissions</li>
+            <li>Designed for long-term daily use</li>
           </ul>
         </article>
-
-        <article class="feature-card">
-          <div class="feature-icon">📜</div>
-          <div class="feature-title">History &amp; Export</div>
-          <div class="feature-body">
-            No need to retype old calculations every time.
-          </div>
-          <ul class="feature-list">
-            <li>View your previous calculations in a clean history screen.</li>
-            <li>Re-use or modify older calculations easily.</li>
-            <li>Clear history at any time from inside the app.</li>
-          </ul>
-        </article>
-      </div>
-
-      <div class="tools-strip">
-        <span class="tools-chip">📱 Works offline for most tools</span>
-        <span class="tools-chip">🔒 No sign-up • No tracking</span>
-        <span class="tools-chip">⚡ Fast and battery-friendly</span>
-        <span class="tools-chip">🎨 Modern dark UI that matches the app</span>
       </div>
     </section>
 
-    <!-- Download section -->
-    <section id="download">
-      <h2 class="section-title">Download Solve AI</h2>
-      <p class="section-sub">
-        Get the latest version of Solve AI as an Android APK and install it on your device.
-      </p>
-
+    <!-- DOWNLOAD SECTION -->
+    <section class="section download-section">
       <div class="download-card">
-        <div class="download-text">
-          <strong>Direct APK download</strong> – tap the button and your browser will download the
-          Solve AI APK file. After download, open the file and follow the on-screen steps.
+        <div>
+          <h2 class="section-title">Download Solve AI</h2>
+          <p class="section-subtitle">
+            Get the latest version of Solve AI as an Android APK and install it on your device.
+          </p>
         </div>
-
-        <div class="download-cta-row">
-          <a href="solve-ai-v1.0.0.apk" class="btn-primary">
-            <span class="icon">⬇️</span>
-            <span>Download Solve AI APK</span>
-          </a>
-          <div class="apk-note">
-            Tip: If installation is blocked, enable
-            <strong>Install from unknown sources</strong> in your Android settings.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Privacy badge + footer -->
-    <section>
-      <div class="download-card" style="margin-top: 26px; background: rgba(15,23,42,0.98);">
-        <div class="download-text">
-          <strong>Privacy first.</strong> Solve AI is built to collect only the minimum information
-          required for the app to function. No accounts, no personal profile, no ads.
-        </div>
-        <a href="privacy-policy.html" class="btn-secondary">
-          <span class="icon">🔒</span>
-          <span>Read full Privacy Policy</span>
+        <a href="solve-ai-v1.0.0.apk" class="btn btn-primary btn-lg">
+          ⬇️ Download Solve AI APK
         </a>
       </div>
+
+      <p class="install-tip">
+        Tip: If installation is blocked, enable
+        <strong>Install from unknown sources</strong> in your Android settings.
+      </p>
     </section>
+  </main>
 
-    <footer>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-main">
       <div>
-        © 2025 <strong>Solve AI</strong>. Created by Mohammad Samir.
+        <div class="footer-title">Solve AI</div>
+        <p class="footer-text">
+          Smart AI Math Solver, Scientific Calculator, GST &amp; EMI tools, currency &amp;
+          unit converter and more – in one focused app.
+        </p>
       </div>
-      <div>
-        Contact: <a href="mailto:mohammadsamir2424@gmail.com">mohammadsamir2424@gmail.com</a>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="solve-ai-v1.0.0.apk">Download APK</a>
       </div>
-    </footer>
-
-  </div>
-</div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Solve AI.</span>
+      <span>Created by Mohammad Samir.</span>
+    </div>
+  </footer>
 </body>
 </html>
