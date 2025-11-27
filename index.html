@@ -5,175 +5,516 @@
   <title>Solve AI – Smart Math Solver & Scientific Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Basic SEO -->
   <meta name="description"
-        content="Solve AI is an all-in-one smart calculator app with a scientific calculator, AI math solver, GST & EMI tools, currency & unit converter, and more." />
-  <meta name="keywords"
-        content="Solve AI, smart calculator, scientific calculator, GST calculator, EMI calculator, unit converter, currency converter, age calculator, math solver" />
-
-  <!-- Open Graph (for link previews) -->
-  <meta property="og:title" content="Solve AI – Smart Math Solver & Scientific Calculator" />
-  <meta property="og:description"
-        content="All-in-one calculator with AI math solver, GST & EMI tools, currency & unit converter, and more." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://samir2692087.github.io/solve-ai-site/" />
-  <meta property="og:image" content="icon.png" />
+        content="Solve AI is a smart calculator app with a scientific calculator, AI math solver, GST & EMI tools, currency & unit converter, and more." />
 
   <link rel="icon" type="image/png" href="icon.png" />
-  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ---------- RESET / BASE ---------- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0b1120, #020617);
+      color: #e5e7eb;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ---------- LAYOUT ---------- */
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 16px 16px 56px;
+    }
+
+    /* ---------- HEADER ---------- */
+    .top-bar {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 10px 16px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.85);
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-logo-wrap {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: radial-gradient(circle at top, #38bdf8, #6366f1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      object-fit: cover;
+      display: block;
+    }
+    .brand-text-main {
+      font-weight: 600;
+      font-size: 1.02rem;
+    }
+    .brand-text-sub {
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .pill {
+      font-size: 0.78rem;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid #1f2937;
+      color: #9ca3af;
+    }
+    .btn-small {
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: none;
+      background: #f97316;
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn-small:hover {
+      background: #ea580c;
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      margin-top: 26px;
+      align-items: stretch;
+    }
+    .hero-main {
+      flex: 1 1 320px;
+      min-width: 0;
+    }
+    .hero-title {
+      font-size: 2.1rem;
+      line-height: 1.2;
+      margin: 0 0 8px;
+    }
+    .hero-title span {
+      background: linear-gradient(90deg, #38bdf8, #22c55e);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .hero-text {
+      margin: 0 0 16px;
+      font-size: 0.98rem;
+      color: #9ca3af;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .tag {
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      border: 1px solid #1f2937;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .btn-primary {
+      padding: 12px 26px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.96rem;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      filter: brightness(1.08);
+    }
+    .btn-outline {
+      padding: 11px 22px;
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      color: #e5e7eb;
+      font-size: 0.9rem;
+      background: transparent;
+      cursor: pointer;
+    }
+    .btn-outline:hover {
+      border-color: #9ca3af;
+    }
+    .hero-note {
+      font-size: 0.82rem;
+      color: #6b7280;
+      margin: 2px 0 0;
+    }
+
+    /* ---------- HERO PREVIEW CARD ---------- */
+    .hero-card {
+      flex: 0 1 320px;
+      max-width: 360px;
+      border-radius: 18px;
+      padding: 18px 18px 16px;
+      background: radial-gradient(circle at top, #1e293b, #020617);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.8);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+    .chip-sm {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 3px 9px;
+      font-size: 0.75rem;
+    }
+    .calc-expression {
+      font-family: "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.94rem;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.9);
+    }
+    .calc-result {
+      padding: 8px 12px 10px;
+      border-radius: 12px;
+      background: rgba(15, 118, 110, 0.18);
+      border: 1px solid rgba(45, 212, 191, 0.3);
+      font-size: 0.92rem;
+    }
+    .calc-result strong {
+      color: #22c55e;
+    }
+    .card-footer {
+      font-size: 0.78rem;
+      color: #9ca3af;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+
+    /* ---------- DOWNLOAD SECTION ---------- */
+    .section {
+      margin-top: 44px;
+    }
+    .section-title {
+      font-size: 1.45rem;
+      margin-bottom: 8px;
+    }
+    .section-text {
+      font-size: 0.95rem;
+      color: #9ca3af;
+      max-width: 620px;
+    }
+    .download-block {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-download {
+      padding: 13px 28px;
+      border-radius: 999px;
+      background: #22c55e;
+      color: #022c22;
+      font-weight: 600;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+    .btn-download:hover {
+      filter: brightness(1.07);
+    }
+    .download-note {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    /* ---------- FEATURES GRID ---------- */
+    .features-grid {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+    }
+    .feature-card {
+      background: rgba(15, 23, 42, 0.98);
+      border-radius: 14px;
+      padding: 14px 16px 12px;
+      border: 1px solid #111827;
+    }
+    .feature-card h3 {
+      margin: 0 0 6px;
+      font-size: 1.02rem;
+    }
+    .feature-card ul {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+    .feature-card li {
+      margin-bottom: 4px;
+    }
+
+    /* ---------- AUDIENCE ---------- */
+    .audience-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 8px 0 10px;
+    }
+    .audience-tags span {
+      font-size: 0.85rem;
+      border-radius: 999px;
+      border: 1px solid #1f2937;
+      padding: 6px 11px;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    /* ---------- FOOTER ---------- */
+    .footer {
+      border-top: 1px solid #111827;
+      margin-top: 40px;
+      padding: 16px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: #6b7280;
+    }
+    .footer a {
+      color: #93c5fd;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 720px) {
+      .hero {
+        flex-direction: column;
+      }
+      .hero-card {
+        max-width: 100%;
+      }
+      .top-bar {
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- HEADER -->
-  <header class="header">
-    <div class="logo-area">
-      <img src="icon.png" class="logo-icon" alt="Solve AI logo" />
-      <div class="logo-text">
-        <div class="brand-name">Solve AI</div>
-        <div class="brand-tagline">Smart Math Solver & Utilities</div>
+  <header class="top-bar">
+    <div class="brand">
+      <div class="brand-logo-wrap">
+        <!-- Make sure icon.png is in the same folder as this file -->
+        <img src="icon.png" alt="Solve AI logo" class="brand-logo" />
+      </div>
+      <div>
+        <div class="brand-text-main">Solve AI</div>
+        <div class="brand-text-sub">Smart Math Solver &amp; Utilities</div>
       </div>
     </div>
 
-    <!-- Scrolls down to the download section -->
-    <a href="#download" class="btn-mini">Get APK</a>
+    <div class="header-actions">
+      <div class="pill">No sign-up • No ads</div>
+      <!-- Top "Get APK" directly downloads -->
+      <a href="Solve-AI.apk" download class="btn-small">Get APK</a>
+    </div>
   </header>
 
-  <!-- MAIN CONTENT -->
-  <main>
-    <!-- HERO / INTRO -->
+  <div class="page">
+    <!-- HERO -->
     <section class="hero">
-      <div class="hero-inner">
-        <h1>All-in-One <span class="accent">Smart Calculator</span></h1>
+      <div class="hero-main">
+        <h1 class="hero-title">All-in-One <span>Smart Calculator</span></h1>
         <p class="hero-text">
           Solve AI combines a scientific calculator, AI math solver, GST &amp; EMI tools,
-          currency converter, unit converter and more – in one clean and powerful app.
-          Built for students, professionals, traders and everyday users.
+          currency converter, unit converter and more in one precise, distraction-free app.
+          Ideal for students, professionals, traders and everyday users.
         </p>
 
-        <div class="chip-row">
-          <span class="chip">Scientific Calculator</span>
-          <span class="chip">AI Step-by-Step Solver</span>
-          <span class="chip">GST &amp; EMI Tools</span>
-          <span class="chip">Currency &amp; Unit Converter</span>
+        <div class="hero-tags">
+          <span class="tag">Scientific Calculator</span>
+          <span class="tag">AI Step-by-Step Solver</span>
+          <span class="tag">GST &amp; EMI Tools</span>
+          <span class="tag">Currency &amp; Unit Converter</span>
+          <span class="tag">Age Calculator &amp; History</span>
         </div>
 
-        <div class="hero-cta">
-          <a href="#download" class="btn-primary">Download Solve AI APK</a>
-          <a href="privacy-policy.html" class="btn-ghost">Privacy Policy</a>
+        <div class="hero-buttons">
+          <a href="Solve-AI.apk" download class="btn-primary">
+            ⬇️ Download Solve AI APK
+          </a>
+          <a href="privacy-policy.html" class="btn-outline">
+            Privacy Policy
+          </a>
         </div>
 
         <p class="hero-note">
-          No sign-up • No ads • Works online & offline*
+          *Some features (AI solver &amp; live currency rates) require internet.
         </p>
       </div>
 
-      <!-- Simple “preview card” (no image needed) -->
-      <div class="preview-card">
-        <div class="preview-header">
-          <span class="preview-title">Scientific Calculator</span>
-          <span class="preview-mode">DEG • SCI</span>
+      <!-- Preview card -->
+      <aside class="hero-card" aria-label="Solve AI preview">
+        <div class="card-header">
+          <span>Scientific Calculator</span>
+          <span>DEG · SCI</span>
         </div>
-        <div class="preview-expression">
+        <div class="calc-expression">
           ∫ 2x · e<sup>x</sup> dx from 0 to 1
         </div>
-        <div class="preview-result">
-          = 2e − 2 ≈ <strong>3.4366</strong>
+        <div class="calc-result">
+          Result: <strong>2e − 2 ≈ 3.4366</strong><br />
+          <span style="font-size:0.8rem;color:#a5b4fc;">Explained step-by-step by AI.</span>
         </div>
-        <div class="preview-footer">
-          AI Math Solver • History • Export
+        <div class="card-footer">
+          <span class="chip-sm">AI Math Solver</span>
+          <span class="chip-sm">History • Export</span>
         </div>
-      </div>
+      </aside>
     </section>
 
     <!-- DOWNLOAD SECTION -->
-    <section id="download" class="download-section">
-      <h2>Download Solve AI</h2>
+    <section class="section" id="download">
+      <h2 class="section-title">Download Solve AI</h2>
       <p class="section-text">
         Get the latest version of Solve AI as an Android APK and install it on your device.
       </p>
 
-      <!-- IMPORTANT: Make sure the file name here matches your actual APK file in the repo -->
-      <a href="Solve-AI.apk" class="btn-download" download>
-        ⬇️ Download Solve AI APK
-      </a>
-
-      <p class="download-note">
-        Tip: If installation is blocked, enable <strong>Install from unknown sources</strong>
-        in your Android settings.
-      </p>
+      <div class="download-block">
+        <a href="Solve-AI.apk" download class="btn-download">
+          ⬇️ Download APK
+        </a>
+        <span class="download-note">
+          If installation is blocked, enable <strong>Install from unknown sources</strong> in your Android settings.
+        </span>
+      </div>
     </section>
 
     <!-- FEATURES GRID -->
-    <section class="features">
-      <h2>What You Get with Solve AI</h2>
+    <section class="section">
+      <h2 class="section-title">Key Features</h2>
       <div class="features-grid">
-
         <article class="feature-card">
           <h3>Scientific Calculator &amp; AI Solver</h3>
           <ul>
-            <li>Full scientific functions: powers, roots, logs, trigonometry and more.</li>
-            <li>AI explains step-by-step solutions for math problems.</li>
-            <li>Type, draw or speak your question.</li>
-            <li>Clean, dark UI designed for long study sessions.</li>
+            <li>Full scientific functions – trig, logs, powers, roots and more.</li>
+            <li>AI explains math problems step-by-step.</li>
+            <li>Input via typing, drawing or voice.</li>
+            <li>Clean dark theme for long study sessions.</li>
           </ul>
         </article>
 
         <article class="feature-card">
           <h3>GST &amp; EMI Tools</h3>
           <ul>
-            <li>GST calculator with add/remove GST modes.</li>
-            <li>Breakdown of net amount, GST and total amount.</li>
-            <li>EMI calculator for loans with adjustable interest and tenure.</li>
-            <li>See total payable, interest and monthly EMI clearly.</li>
+            <li>GST add / remove modes with clear breakdown.</li>
+            <li>Supports 3%, 5%, 12%, 18% and 28% rates.</li>
+            <li>EMI calculator with adjustable rate and tenure.</li>
+            <li>Instant view of monthly EMI, interest and total payable.</li>
           </ul>
         </article>
 
         <article class="feature-card">
           <h3>Currency &amp; Unit Converter</h3>
           <ul>
-            <li>Real-time currency converter with live exchange rates*.</li>
-            <li>Convert across 20+ unit categories: length, area, volume, speed, energy, etc.</li>
-            <li>Simple sliders and inputs for quick conversions.</li>
+            <li>Live currency rates* for major world currencies.</li>
+            <li>20+ unit categories – length, area, volume, speed, energy, etc.</li>
+            <li>Designed for shopkeepers, traders and travellers.</li>
           </ul>
         </article>
 
         <article class="feature-card">
           <h3>Everyday Utilities</h3>
           <ul>
-            <li>Age calculator – exact age in years, months and days.</li>
-            <li>Calculation history – review, reuse and export past results.</li>
-            <li>Designed for students, shopkeepers, freelancers and office users.</li>
+            <li>Age calculator – exact years, months and days.</li>
+            <li>History – review and export past calculations.</li>
+            <li>Works great for students, freelancers and office users.</li>
           </ul>
         </article>
-
       </div>
     </section>
 
     <!-- WHO IT'S FOR -->
-    <section class="audience">
-      <h2>Who Is Solve AI For?</h2>
+    <section class="section">
+      <h2 class="section-title">Built For</h2>
       <div class="audience-tags">
         <span>📚 Students</span>
-        <span>🧮 Accountants &amp; shopkeepers</span>
+        <span>🧾 Shopkeepers &amp; traders</span>
         <span>💼 Professionals &amp; freelancers</span>
         <span>🏠 Everyday users</span>
       </div>
       <p class="section-text">
-        Whether you are calculating GST for a bill, checking EMIs for a loan,
-        converting currencies for travel, or solving a tough math problem,
-        Solve AI keeps everything in one place.
+        Whether you’re calculating GST on a bill, checking EMIs for a loan,
+        converting currencies for travel or solving a difficult equation,
+        Solve AI keeps everything in one precise toolkit.
       </p>
     </section>
-  </main>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <p>
-      &copy; 2025 Solve AI. All rights reserved. &nbsp;|&nbsp;
-      <a href="privacy-policy.html">Privacy Policy</a>
-    </p>
-    <p class="footer-credit">
-      Created by Mohammad Samir
-    </p>
-  </footer>
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>
+        &copy; 2025 Solve AI. All rights reserved. |
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </p>
+      <p>Created by Mohammad Samir</p>
+    </footer>
+  </div>
 </body>
 </html>
