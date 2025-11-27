@@ -3,16 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Solve AI – Smart Math Solver & Scientific Calculator</title>
+  <title>Solve AI – Smart Calculator & Math Tools</title>
 
   <style>
     :root {
       --bg: #020617;
-      --bg-soft: #020617;
       --card: #020617;
-      --card-soft: #020617;
       --primary: #2563eb;
-      --primary-soft: rgba(37,99,235,0.18);
       --accent: #22c55e;
       --text-main: #f9fafb;
       --text-muted: #9ca3af;
@@ -36,15 +33,15 @@
       text-decoration: none;
     }
 
-    /* --- Layout --- */
+    /* Header / navbar */
     header {
-      padding: 24px 18px 8px;
-      border-bottom: 1px solid rgba(148,163,184,0.18);
-      backdrop-filter: blur(18px);
       position: sticky;
       top: 0;
-      z-index: 20;
-      background: radial-gradient(circle at top, rgba(37,99,235,0.18), rgba(2,6,23,0.98));
+      z-index: 10;
+      padding: 18px 18px 10px;
+      background: radial-gradient(circle at top, rgba(37,99,235,0.25), rgba(2,6,23,0.98));
+      border-bottom: 1px solid rgba(148,163,184,0.18);
+      backdrop-filter: blur(18px);
     }
 
     .nav {
@@ -98,6 +95,7 @@
       border-radius: 999px;
       border: 1px solid rgba(148,163,184,0.4);
       color: var(--text-muted);
+      white-space: nowrap;
     }
 
     .btn-mini {
@@ -109,8 +107,10 @@
       color: #0b1120;
       font-weight: 600;
       cursor: pointer;
+      white-space: nowrap;
     }
 
+    /* Layout */
     main {
       max-width: 1040px;
       margin: 0 auto;
@@ -121,10 +121,10 @@
       margin-bottom: 32px;
     }
 
-    /* --- Hero --- */
+    /* Hero */
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
       gap: 22px;
       align-items: center;
     }
@@ -152,22 +152,7 @@
       color: var(--text-muted);
       font-size: 0.95rem;
       max-width: 32rem;
-      margin-bottom: 16px;
-    }
-
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-
-    .hero-badge {
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      border: 1px solid rgba(148,163,184,0.5);
-      color: var(--text-muted);
+      margin-bottom: 18px;
     }
 
     .hero-cta-row {
@@ -175,7 +160,7 @@
       flex-wrap: wrap;
       gap: 10px;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
     .btn {
@@ -209,74 +194,38 @@
       color: var(--text-muted);
     }
 
-    .hero-small {
+    .hero-note {
       font-size: 0.8rem;
       color: var(--text-muted);
     }
 
-    .hero-small span {
-      color: #a5b4fc;
-      font-weight: 500;
-    }
-
-    /* --- Hero Card --- */
+    /* Hero preview card – simplified */
     .hero-card {
-      position: relative;
       border-radius: 22px;
-      padding: 18px 16px 16px;
-      background: radial-gradient(circle at top, rgba(37,99,235,0.45), #020617);
-      box-shadow: 0 20px 50px rgba(15,23,42,0.85);
+      padding: 16px 14px;
+      background: radial-gradient(circle at top, rgba(37,99,235,0.35), #020617);
+      box-shadow: 0 20px 40px rgba(15,23,42,0.85);
       border: 1px solid rgba(148,163,184,0.45);
       overflow: hidden;
+      font-size: 0.82rem;
     }
 
     .hero-card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
-      font-size: 0.82rem;
+      margin-bottom: 10px;
       color: var(--text-muted);
+      font-size: 0.78rem;
     }
 
     .hero-card-badge {
-      padding: 4px 8px;
+      padding: 3px 8px;
       border-radius: 999px;
-      background: rgba(34,197,94,0.14);
+      background: rgba(34,197,94,0.12);
       color: #bbf7d0;
       font-size: 0.7rem;
-      border: 1px solid rgba(74,222,128,0.5);
-    }
-
-    .hero-card-main {
-      border-radius: 16px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(51,65,85,0.9);
-      padding: 12px 12px 10px;
-      margin-bottom: 12px;
-    }
-
-    .hero-card-main-title {
-      font-size: 0.86rem;
-      margin-bottom: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .hero-chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 8px;
-    }
-
-    .hero-chip {
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: rgba(31,41,55,0.95);
-      font-size: 0.7rem;
-      color: var(--text-muted);
+      border: 1px solid rgba(74,222,128,0.4);
     }
 
     .hero-display {
@@ -285,7 +234,7 @@
       border-radius: 12px;
       background: radial-gradient(circle at top, rgba(96,165,250,0.35), rgba(15,23,42,0.9));
       border: 1px solid rgba(129,140,248,0.75);
-      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
       font-size: 0.9rem;
       color: #e5e7eb;
     }
@@ -298,41 +247,15 @@
       letter-spacing: 0.09em;
     }
 
-    .hero-display-eq {
-      font-size: 0.95rem;
-    }
-
     .hero-display-ans {
       margin-top: 4px;
       color: #a5b4fc;
       font-size: 0.88rem;
     }
 
-    .hero-card-footer {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
-      font-size: 0.72rem;
-    }
-
-    .hero-card-foot-item {
-      padding: 7px 8px;
-      border-radius: 11px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(30,64,175,0.8);
-      color: var(--text-muted);
-    }
-
-    .hero-card-foot-item strong {
-      display: block;
-      color: #e5e7eb;
-      font-size: 0.78rem;
-      margin-bottom: 2px;
-    }
-
-    /* --- Feature Grid --- */
+    /* Sections */
     .section-title {
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 600;
       margin-bottom: 4px;
     }
@@ -352,7 +275,7 @@
     .feature-card {
       background: rgba(15,23,42,0.96);
       border-radius: 14px;
-      padding: 12px 12px 12px;
+      padding: 12px;
       border: 1px solid var(--border-subtle);
     }
 
@@ -365,7 +288,7 @@
     }
 
     .feature-name {
-      font-size: 0.98rem;
+      font-size: 0.97rem;
       font-weight: 600;
       margin-bottom: 4px;
     }
@@ -387,77 +310,13 @@
       margin-bottom: 2px;
     }
 
-    /* --- Highlights / Who For / FAQ --- */
-    .two-col {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 16px;
-    }
-
-    @media (max-width: 800px) {
-      .two-col {
-        grid-template-columns: minmax(0,1fr);
-      }
-    }
-
-    .card-soft {
-      background: rgba(15,23,42,0.96);
-      border-radius: 14px;
-      padding: 14px 14px 12px;
-      border: 1px solid var(--border-subtle);
-    }
-
-    .tag {
-      font-size: 0.73rem;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: #a5b4fc;
-      margin-bottom: 4px;
-    }
-
-    .card-soft h3 {
-      margin: 0 0 6px;
-      font-size: 1rem;
-    }
-
-    .pill-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 6px;
-      font-size: 0.78rem;
-    }
-
-    .pill {
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.6);
-      color: var(--text-muted);
-    }
-
-    .faq-item {
-      margin-bottom: 8px;
-    }
-
-    .faq-q {
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-
-    .faq-a {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-    }
-
-    /* --- Download / Privacy --- */
+    /* Download section */
     .download-section {
       background: linear-gradient(135deg, rgba(37,99,235,0.25), rgba(22,163,74,0.12));
       border-radius: 18px;
       padding: 16px 14px 14px;
       border: 1px solid rgba(129,140,248,0.5);
       text-align: center;
-      margin-top: 8px;
     }
 
     .download-section h2 {
@@ -494,14 +353,14 @@
 
 <body>
 
-  <!-- === NAVBAR === -->
+  <!-- HEADER -->
   <header>
     <div class="nav">
       <div class="nav-left">
         <div class="nav-icon">≡</div>
         <div>
           <div class="nav-title">Solve AI</div>
-          <div class="nav-tagline">Smart Math Solver & Utilities</div>
+          <div class="nav-tagline">Smart Calculator & Math Tools</div>
         </div>
       </div>
       <div class="nav-right">
@@ -512,24 +371,17 @@
   </header>
 
   <main>
-    <!-- === HERO === -->
+    <!-- HERO -->
     <section class="hero">
       <div>
         <h1 class="hero-title">
           All-in-One <span class="hero-highlight">Smart Calculator</span>
         </h1>
         <p class="hero-sub">
-          Solve AI combines a scientific calculator, AI math solver, GST & EMI tools,
-          currency converter, unit converter and more – in one clean and powerful app.
-          Built for students, professionals, traders and everyday users.
+          Solve AI combines a scientific calculator, AI math solver, GST &amp; EMI tools,
+          currency converter and unit converter in one simple, powerful app – designed for
+          students, professionals, traders and everyday users.
         </p>
-
-        <div class="hero-badges">
-          <span class="hero-badge">Scientific Calculator</span>
-          <span class="hero-badge">AI Step-by-Step Solver</span>
-          <span class="hero-badge">EMI & GST Tools</span>
-          <span class="hero-badge">History & Export</span>
-        </div>
 
         <div class="hero-cta-row">
           <a class="btn btn-primary" href="#download">
@@ -539,253 +391,117 @@
             🔒 Privacy Policy
           </a>
         </div>
-        <div class="hero-small">
-          Works great for <span>students • shopkeepers • freelancers • office users</span>
+        <div class="hero-note">
+          Works offline for most tools. AI solving and live currency rates need internet.
         </div>
       </div>
 
-      <!-- Hero Preview Card -->
-      <div class="hero-card" aria-hidden="true">
+      <!-- small, simple preview card -->
+      <aside class="hero-card" aria-hidden="true">
         <div class="hero-card-header">
-          <span>Live Preview • Solve AI</span>
+          <span>Scientific Calculator</span>
           <span class="hero-card-badge">AI powered</span>
         </div>
-
-        <div class="hero-card-main">
-          <div class="hero-card-main-title">
-            <span>Scientific Calculator</span>
-            <span style="font-size:0.75rem;color:#a5b4fc;">DEG • SCI</span>
-          </div>
-          <div class="hero-chip-row">
-            <span class="hero-chip">sin(θ)</span>
-            <span class="hero-chip">log</span>
-            <span class="hero-chip">x²</span>
-            <span class="hero-chip">√x</span>
-            <span class="hero-chip">Ans</span>
-          </div>
-          <div class="hero-display">
-            <div class="hero-display-label">Example Problem</div>
-            <div class="hero-display-eq">∫ 2x · eˣ dx from 0 to 1</div>
-            <div class="hero-display-ans">= 2e − 2 ≈ 3.4366</div>
-          </div>
+        <div style="font-size:0.8rem;color:var(--text-muted);">
+          Clean, modern scientific calculator with full keyboard and history.
         </div>
-
-        <div class="hero-card-footer">
-          <div class="hero-card-foot-item">
-            <strong>AI Math Solver</strong>
-            Type, draw or speak any problem and get a clear,
-            step-by-step explanation.
-          </div>
-          <div class="hero-card-foot-item">
-            <strong>Smart Tools</strong>
-            GST, EMI, currency, unit converter, age calculator
-            and more – all inside one app.
-          </div>
+        <div class="hero-display" style="margin-top:10px;">
+          <div class="hero-display-label">Example problem</div>
+          <div>∫ 2x · eˣ dx from 0 to 1</div>
+          <div class="hero-display-ans">Answer: 2e − 2 ≈ 3.4366</div>
         </div>
-      </div>
+      </aside>
     </section>
 
-    <!-- === FEATURE GRID (DETAILED) === -->
+    <!-- FEATURES (simplified, professional) -->
     <section>
-      <div class="section-title">Everything inside Solve AI</div>
+      <div class="section-title">What you get in Solve AI</div>
       <div class="section-subtitle">
-        Each feature is carefully designed to be simple, accurate and fast.
+        Essential tools for study, work and daily calculations – without any clutter.
       </div>
 
       <div class="features-grid">
 
-        <!-- Scientific Calculator -->
         <article class="feature-card">
-          <div class="feature-label">Core Tool</div>
+          <div class="feature-label">Core</div>
           <div class="feature-name">Scientific Calculator</div>
           <p class="feature-desc">
-            A clean, powerful scientific calculator for everyday and advanced use.
+            Modern, accurate calculator for everyday and advanced calculations.
           </p>
           <ul class="feature-list">
-            <li>Standard + scientific functions (%, √, x², 1/x, π, e, etc.).</li>
-            <li>Trigonometric functions: sin, cos, tan and inverse functions.</li>
-            <li>Log, ln, exponent, power and memory keys (M+, M-, MR).</li>
-            <li>Support for brackets and complex expressions.</li>
-            <li>Instant result preview with high precision.</li>
+            <li>Standard &amp; scientific keys (%, √, x², 1/x, π, e, etc.).</li>
+            <li>Trigonometry, powers, logs and memory functions.</li>
+            <li>Supports brackets and complex expressions with history.</li>
           </ul>
         </article>
 
-        <!-- AI Math Solver -->
         <article class="feature-card">
-          <div class="feature-label">Smart Engine</div>
+          <div class="feature-label">AI</div>
           <div class="feature-name">AI Math Solver</div>
           <p class="feature-desc">
-            Ask Solve AI like a tutor and get step-by-step solutions.
+            Ask questions like a tutor and see clear, step-by-step answers.
           </p>
           <ul class="feature-list">
             <li>Type, speak or upload an image of your problem.</li>
-            <li>Handles algebra, calculus, equations and word problems.</li>
-            <li>Clear, textbook-style explanation for each step.</li>
-            <li>Great for checking homework and understanding concepts.</li>
-            <li>No account required – just open and start solving.</li>
+            <li>Algebra, calculus, equations and word problems.</li>
+            <li>Designed to help you understand, not just copy answers.</li>
           </ul>
         </article>
 
-        <!-- Unit Converter -->
         <article class="feature-card">
-          <div class="feature-label">Daily Utility</div>
-          <div class="feature-name">Unit Converter</div>
+          <div class="feature-label">Business</div>
+          <div class="feature-name">GST &amp; EMI Tools</div>
           <p class="feature-desc">
-            Convert units in seconds – accurate and easy to understand.
+            Simple tools for shopkeepers, small businesses and finance planning.
           </p>
           <ul class="feature-list">
-            <li>Length, area, volume and weight.</li>
-            <li>Temperature (°C, °F, K), speed and energy.</li>
-            <li>Pressure, data size and more practical units.</li>
-            <li>Live conversion as you type – no extra steps.</li>
+            <li>GST calculator with 3%, 5%, 12%, 18% and 28% slabs.</li>
+            <li>Exclusive (add GST) and inclusive (remove GST) modes.</li>
+            <li>EMI calculator with monthly EMI and total interest view.</li>
           </ul>
         </article>
 
-        <!-- Currency Converter -->
         <article class="feature-card">
-          <div class="feature-label">Global</div>
-          <div class="feature-name">Currency Converter</div>
+          <div class="feature-label">Utilities</div>
+          <div class="feature-name">Unit &amp; Currency Converter</div>
           <p class="feature-desc">
-            Check real-time exchange rates directly inside the app.
+            Quick conversions for study, travel and daily life.
           </p>
           <ul class="feature-list">
-            <li>Supports major world currencies (USD, INR, EUR, GBP, etc.).</li>
-            <li>Online rates with clear “1 USD = XX INR” style format.</li>
-            <li>Perfect for travellers, freelancers and online buyers.</li>
+            <li>Convert length, area, volume, temperature, weight and more.</li>
+            <li>Live currency rates for major world currencies.</li>
           </ul>
         </article>
 
-        <!-- GST Calculator -->
-        <article class="feature-card">
-          <div class="feature-label">For Business</div>
-          <div class="feature-name">GST Calculator</div>
-          <p class="feature-desc">
-            Quickly add or remove GST for Indian tax slabs.
-          </p>
-          <ul class="feature-list">
-            <li>Supports 3%, 5%, 12%, 18% and 28% GST slabs.</li>
-            <li>Exclusive (Add GST) and Inclusive (Remove GST) modes.</li>
-            <li>Shows net amount, GST amount and total amount clearly.</li>
-            <li>Helpful for shopkeepers, businesses and billing.</li>
-          </ul>
-        </article>
-
-        <!-- EMI Calculator -->
-        <article class="feature-card">
-          <div class="feature-label">Finance</div>
-          <div class="feature-name">EMI Calculator</div>
-          <p class="feature-desc">
-            Plan your loans and EMIs with full transparency.
-          </p>
-          <ul class="feature-list">
-            <li>Works for home loan, car loan, personal loan, etc.</li>
-            <li>Adjust loan amount, interest rate and tenure (years/months).</li>
-            <li>Shows monthly EMI and total interest payable.</li>
-            <li>Great for comparing loan offers and budgeting.</li>
-          </ul>
-        </article>
-
-        <!-- Age Calculator -->
         <article class="feature-card">
           <div class="feature-label">Personal</div>
-          <div class="feature-name">Age Calculator</div>
+          <div class="feature-name">Age &amp; History</div>
           <p class="feature-desc">
-            Find exact age in years, months and days from date of birth.
+            Small details that make everyday calculations easier.
           </p>
           <ul class="feature-list">
-            <li>Simple calendar input for accurate date selection.</li>
-            <li>Instant age breakdown – years, months, days.</li>
-            <li>Useful for forms, registrations and documents.</li>
+            <li>Age calculator: exact years, months and days from date of birth.</li>
+            <li>Calculation history: review or clear past results when you want.</li>
           </ul>
         </article>
 
-        <!-- History & Export -->
         <article class="feature-card">
-          <div class="feature-label">Productivity</div>
-          <div class="feature-name">Calculation History</div>
+          <div class="feature-label">Privacy</div>
+          <div class="feature-name">Built to Respect Your Data</div>
           <p class="feature-desc">
-            Never lose an important calculation again.
+            No sign-up, no ads, and no unnecessary personal data.
           </p>
           <ul class="feature-list">
-            <li>Automatically saves your previous calculations.</li>
-            <li>Review past results anytime inside the History section.</li>
-            <li>Clear individual entries or wipe everything when needed.</li>
-          </ul>
-        </article>
-
-        <!-- Privacy & Safety -->
-        <article class="feature-card">
-          <div class="feature-label">Trust</div>
-          <div class="feature-name">Privacy-Friendly Design</div>
-          <p class="feature-desc">
-            Built to respect your privacy from day one.
-          </p>
-          <ul class="feature-list">
-            <li>No account, no sign-up and no personal profile.</li>
-            <li>No ads or hidden tracking inside the app.</li>
-            <li>Calculator and most tools work locally on your device.</li>
-            <li>Read full details in the
-              <a href="privacy-policy.html" style="color:#a5b4fc;">Privacy Policy</a>.
-            </li>
+            <li>Most calculations run locally on your device.</li>
+            <li>AI and currency calls go only to trusted providers.</li>
+            <li>Full details in the <a href="privacy-policy.html" style="color:#a5b4fc;">Privacy Policy</a>.</li>
           </ul>
         </article>
 
       </div>
     </section>
 
-    <!-- === WHO IT'S FOR + FAQ === -->
-    <section>
-      <div class="two-col">
-
-   <!-- Who it's for -->
-        <div class="card-soft">
-          <div class="tag">Who is Solve AI for?</div>
-          <h3>Perfect for many different users</h3>
-          <p style="font-size:0.86rem;color:var(--text-muted);margin-bottom:6px;">
-            Solve AI is designed to be simple enough for beginners and powerful enough
-            for advanced users.
-          </p>
-          <div class="pill-list">
-            <span class="pill">School & college students</span>
-            <span class="pill">Coaching & self-study</span>
-            <span class="pill">Shopkeepers & GST billing</span>
-            <span class="pill">Freelancers & online workers</span>
-            <span class="pill">Office professionals</span>
-            <span class="pill">Finance & loan planning</span>
-          </div>
-        </div>
-
-        <!-- FAQ -->
-        <div class="card-soft">
-          <div class="tag">Quick FAQ</div>
-          <div class="faq-item">
-            <div class="faq-q">Does Solve AI need internet?</div>
-            <div class="faq-a">
-              The basic calculator, GST, EMI and most tools can work offline.
-              AI solving and live currency rates need an internet connection.
-            </div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-q">Do I need to create an account?</div>
-            <div class="faq-a">
-              No. You can use Solve AI immediately after installing –
-              no login or registration required.
-            </div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-q">Is my data safe?</div>
-            <div class="faq-a">
-              We do not sell your data or show ads. Most calculations happen on your
-              device. AI requests are sent only to our trusted AI provider to generate
-              answers. Details are explained in the Privacy Policy.
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- === DOWNLOAD SECTION === -->
+    <!-- DOWNLOAD -->
     <section id="download">
       <div class="download-section">
         <h2>Download Solve AI APK</h2>
@@ -793,21 +509,20 @@
           Install the latest official version of Solve AI directly from the developer.
         </p>
 
-        <!-- IMPORTANT: Update APK file name if needed -->
+        <!-- change file name if needed -->
         <a class="btn btn-primary" href="solve-ai-v1.0.0.apk" download>
           ⬇️ Download APK (v1.0.0)
         </a>
 
         <div class="meta-line">
-          File type: Android APK • Size depends on build • Created by Mohammad Samir
+          File: Android APK • Version 1.0.0 • Created by Mohammad Samir
         </div>
         <div class="meta-line">
-          Need details about data & permissions?
-          <a href="privacy-policy.html">Read the Privacy Policy</a>.
+          Need more information? Read the
+          <a href="privacy-policy.html">Privacy Policy</a>.
         </div>
       </div>
     </section>
-
   </main>
 
   <footer>
@@ -817,5 +532,3 @@
 
 </body>
 </html>
-
-       
